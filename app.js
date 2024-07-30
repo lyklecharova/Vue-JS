@@ -4,9 +4,9 @@ const app = Vue.createApp({
             url: 'https://vuejs.org/',
             showBooks: true,
             books:[
-                {title: 'name of wind',author: 'patric'},
-                {title: 'the way of kings',author: 'brandon'},
-                {title: 'the final empire',author: 'brandon'},
+                {title: 'name of wind',author: 'patric', img:'img/1.jpg'},
+                {title: 'the way of kings',author: 'brandon', img:'img/2.jpg'},
+                {title: 'the final empire',author: 'brandon', img:'img/3.jpg'},
             ]
             // title: 'The Final Empire',
             // author: 'Brandon Sanderson',
