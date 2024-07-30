@@ -23,17 +23,24 @@ const app = Vue.createApp({
         toggleShowBooks() {
             this.showBooks = !this.showBooks;
         },
-        handleEvent(e, data) {
-            console.log(e, e.type);
-            if (data) {
-                console.log(data);
-            }
-        },
-        handleMousemove(e) {
-            this.x = e.offsetX;
-            this.y = e.offsetY;
+        // handleEvent(e, data) {
+        //     console.log(e, e.type);
+        //     if (data) {
+        //         console.log(data);
+        //     }
+        // },
+        // handleMousemove(e) {
+        //     this.x = e.offsetX;
+        //     this.y = e.offsetY;
+        // }
+        toggleFav(book){
+            book.isFav = !book.isFav;
         }
     }
 });
 
 app.mount('#app');
+
+// Challenge - Add to Favs
+// attach a click to each li tag for each book
+// when user click an lu=i, toggle the 'isFav' property of that book
