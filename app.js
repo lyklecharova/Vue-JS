@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            url: 'https://vuejs.org/',
             showBooks: true,
             books:[
                 {title: 'name of wind',author: 'patric'},
