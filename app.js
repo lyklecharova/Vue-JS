@@ -2,11 +2,16 @@ const app = Vue.createApp({
     data() {
         return {
             showBooks: true,
-            title: 'The Final Empire',
-            author: 'Brandon Sanderson',
-            age: 35,
-            x:0,
-            y:0
+            books:[
+                {title: 'name of wind',author: 'patric'},
+                {title: 'the way of kings',author: 'brandon'},
+                {title: 'the final empire',author: 'brandon'},
+            ]
+            // title: 'The Final Empire',
+            // author: 'Brandon Sanderson',
+            // age: 35,
+            // x:0,
+            // y:0
         };
     },
     methods: {
