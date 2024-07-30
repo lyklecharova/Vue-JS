@@ -6,13 +6,31 @@
         <title>Learning Vue</title>
         <script src="https://unpkg.com/vue@3.0.2"></script>
         <style>
-            .box {
+            body {
                 padding: 100px 0;
-                width: 400px;
-                text-align: center;
+                max-width: 960px;
                 background-color: #ddd;
-                margin: 20px;
-                display: inline-block;
+                margin: 20px auto;
+            }
+            p,
+            h3,
+            ul {
+                margin: 0;
+                padding: 0;
+            }
+            li {
+                list-style: none;
+                background-color: #fff;
+                margin: 20px auto;
+                padding: 10px 20px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            li.fav{
+                background:#ff9ed2 ;
+                color: #fff;
             }
         </style>
     </head>
@@ -29,8 +47,8 @@
                 <p>{{books[1].title}} - {{books[1].author}}</p>
                 <p>{{books[2].title}} - {{books[2].author}}</p> -->
                 <ul>
-                    <li v-for="book in books">
-                        <img v-bind:src="book.img" v-bind:alt="book.title">
+                    <li v-for="book in books" v-bind:class="{fav: book.isFav}">
+                        <img v-bind:src="book.img" v-bind:alt="book.title" />
                         <h3>{{book.title}}</h3>
                         <p>{{book.author}}</p>
                     </li>
