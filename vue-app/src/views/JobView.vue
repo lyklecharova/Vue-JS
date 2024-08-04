@@ -6,7 +6,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
                     <main>
                         <div
-                            class="bg-white p-6 rounded-lg shadow-md text-center md:text-left"
+                            class="bg-white 
+                            p-6 rounded-lg 
+                            shadow-md 
+                            text-center 
+                            md:text-left"
                         >
                             <div class="text-gray-500 mb-4">
                                 {{ state.job.type }}
@@ -15,10 +19,16 @@
                                 {{ state.job.title }}
                             </h1>
                             <div
-                                class="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
+                                class="text-gray-500 
+                                mb-4 flex align-middle 
+                                justify-center 
+                                md:justify-start"
                             >
                                 <i
-                                    class="fa-solid fa-location-dot text-lg text-orange-700 mr-2"
+                                    class="pi pi-map-marker 
+                                    text-xl 
+                                    text-orange-700 
+                                    mr-2"
                                 ></i>
                                 <p class="text-orange-700">
                                     {{ state.job.location }}
@@ -72,11 +82,30 @@
                             <h3 class="text-xl font-bold mb-6">Manage Job</h3>
                             <RouterLink
                                 :to="`/jobs/edit/${state.job.id}`"
-                                class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 r ounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                                class="bg-green-500 
+                                hover:bg-green-600 
+                                text-white 
+                                text-center 
+                                font-bold 
+                                py-2 px-4 
+                                rounded-full 
+                                w-full 
+                                focus:outline-none 
+                                focus:shadow-outline 
+                                mt-4 block"
                                 >Edit Job
                             </RouterLink>
-                            <button
-                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                            <button @click="deleteJob"
+                                class="bg-red-500 
+                                hover:bg-red-600 
+                                text-white 
+                                font-bold 
+                                py-2 px-4 
+                                rounded-full 
+                                w-full 
+                                focus:outline-none 
+                                focus:shadow-outline 
+                                mt-4 block"
                             >
                                 Delete Job
                             </button>
@@ -94,17 +123,32 @@
 <script setup>
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import BackButton from "@/components/BackButton.vue";
-import { reactive, onMounted, isShallow } from "vue";
-import { useRoute, RouterLink } from "vue-router";
+import { reactive, onMounted, } from "vue";
+import { useRoute, RouterLink, useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 
 import axios from "axios";
 
 const route = useRoute();
+const router = useRouter();
+const toast = useToast();
+
 const jobId = route.params.id;
 const state = reactive({
     job: {},
     isLoading: true,
 });
+
+const deleteJob = async () =>{
+    try{
+        await axios.delete(`/api/jobs/${jobId}`);
+        toast.success('Jon deleted successfully');
+        router.push('/jobs');
+    }catch(err){
+        console.log('Error deleting job', err);
+        toast.error('Job not deleted');
+    }
+};
 
 onMounted(async () => {
     try {
