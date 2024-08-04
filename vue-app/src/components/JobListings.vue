@@ -2,12 +2,27 @@
     <div>
         <section class="bg-blue-50 px-4 py-10">
             <div class="container-xl lg:container m-auto">
-                <h2 class="text-3xl font-bold text-green-500 mb-6 text-center">
+                <h2 class="text-3xl 
+                font-bold 
+                text-green-500
+                mb-6 
+                text-center">
                     Browse Jobs
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Show loading spinner while loading is true -->
+                <div
+                    v-if="state.isLoading"
+                    class="text-center text-gray-500 py-6"
+                >
+                    <PulseLoader />
+                </div>
+                <!-- Show JobListing when done loading -->
+                <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <JobsListing
-                        v-for="job in jobs.slice(0, limit || jobs.length)"
+                        v-for="job in state.jobs.slice(
+                            0,
+                            limit || state.jobs.length
+                        )"
                         :key="job.id"
                         :job="job"
                     />
@@ -15,11 +30,21 @@
             </div>
         </section>
 
-        <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">
+        <section v-if="showButton" 
+        class="m-auto 
+            max-w-lg my-10 px-6"
+        >
             <RouterLink
                 to="/jobs"
-                class="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
-                >View All Jobs
+                class="block 
+                bg-black 
+                text-white 
+                text-center 
+                py-4 px-6 
+                rounded-xl 
+                hover:bg-gray-700"
+            >
+                View All Jobs
             </RouterLink>
         </section>
     </div>
@@ -27,15 +52,32 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
-import jobData from "@/jobs.json";
-import { ref} from "vue";
+import { reactive, onMounted } from "vue";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import JobsListing from "./JobsListing.vue";
+import axios from "axios";
+
 defineProps({
     limit: Number,
     showButton: {
-        typeof: Boolean,
+        type: Boolean,
         default: false,
+    },
+});
+
+const state = reactive({
+    jobs: [],
+    isLoading: true,
+});
+
+onMounted(async () => {
+    try {
+        const res = await axios.get("/api/jobs");
+        state.jobs = res.data;
+    } catch (err) {
+        console.error("Error fetching jobs", err);
+    } finally {
+        state.isLoading = false;
     }
 });
-const jobs = ref(jobData);
 </script>
