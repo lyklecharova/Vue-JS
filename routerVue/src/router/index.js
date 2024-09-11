@@ -1,6 +1,7 @@
 // DEFINE ROUTER RULES
 
 import AboutView from '@/views/AboutView.vue';
+import CarView from '@/views/CarView.vue';
 import HomeView from '@/views/HomeView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 const router = createRouter({
@@ -15,6 +16,11 @@ const router = createRouter({
             path: '/about',
             name: 'about',
             component: AboutView
+        },
+        {
+            path: '/cars/:id',
+            name: 'car',
+            component: CarView
         }
     ],
 });
