@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Chevy",
+        "price": 15000,
+        "year": 2015
+    },
+    {
+        "id": 2,
+        "name": "Bentley",
+        "price": 15000,
+        "year": 2015
+    },
+    {
+        "id": 3,
+        "name": "Ford",
+        "price": 215000,
+        "year": 2021
+    },
+    {
+        "id": 4,
+        "name": "Citroen C5",
+        "price": 3000,
+        "year": 2005
+    },
+    {
+        "id": 5,
+        "name": "Audi",
+        "price": 85000,
+        "year": 2018
+    },
+    {
+        "id": 6,
+        "name": "BTW",
+        "price": 15000,
+        "year": 2015
+    }
+]
